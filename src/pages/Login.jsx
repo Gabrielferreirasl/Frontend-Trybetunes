@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { createUser } from '../services/userAPI';
-import Loading from './Loading';
+import { Loading } from './Loading';
 
 export class Login extends Component {
   constructor() {
     super();
-    this.state = { user: '', btnDisabled: true, loading: false, login: true };
+    this.state = { user: '', btnDisabled: true, loading: false, loginActivated: true };
     this.renderLogin = this.renderLogin.bind(this);
     this.minimumCharacters = this.minimumCharacters.bind(this);
     this.submitUser = this.submitUser.bind(this);
@@ -20,7 +20,7 @@ export class Login extends Component {
 
   submitUser(event) {
     event.preventDefault();
-    this.setState({ loading: true, login: false });
+    this.setState({ loading: true, loginActivated: false });
     const { user } = this.state;
     createUser({ name: user })
       .then(() => this.setState({ loading: false }));
@@ -58,9 +58,9 @@ export class Login extends Component {
   }
 
   render() {
-    const { login } = this.state;
+    const { loginActivated } = this.state;
     return (
-      login ? this.renderLogin() : this.handleLoading()
+      loginActivated ? this.renderLogin() : this.handleLoading()
     );
   }
 }
