@@ -22,9 +22,9 @@ export class Header extends Component {
         <div>
           <h3 data-testid="header-user-name">{ userFromGetUser.name }</h3>
         </div>
-        <Link to="/search" data-testid="link-to-search">Search</Link>
-        <Link to="/favorites" data-testid="link-to-favorites">Favorites</Link>
-        <Link to="/profile" data-testid="link-to-profile">Profile</Link>
+        <Link to="/search" data-testid="link-to-search">Pesquisa</Link>
+        <Link to="/favorites" data-testid="link-to-favorites">Favoritos</Link>
+        <Link to="/profile" data-testid="link-to-profile">Perfil</Link>
 
       </header>
     );
