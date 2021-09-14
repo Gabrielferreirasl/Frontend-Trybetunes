@@ -17,33 +17,37 @@ class App extends React.Component {
         <Route
           path="/search"
           render={ () => (
-            <Header>
+            <main>
+              <Header />
               <Search />
-            </Header>
+            </main>
           ) }
         />
         <Route
           path="/album/:id"
           render={ () => (
-            <Header>
+            <main>
+              <Header />
               <Album />
-            </Header>
+            </main>
           ) }
         />
         <Route
           path="/favorites"
           render={ () => (
-            <Header>
+            <main>
+              <Header />
               <Favorites />
-            </Header>
+            </main>
           ) }
         />
         <Route
           path="/profile"
           render={ () => (
-            <Header>
+            <main>
+              <Header />
               <Profile />
-            </Header>
+            </main>
           ) }
         />
         <Route path="/profile/edit" component={ ProfileEdit } />
