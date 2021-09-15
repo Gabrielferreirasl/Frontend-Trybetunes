@@ -7,8 +7,10 @@ import { MusicCard } from './MusicCard';
 export class Album extends Component {
   constructor() {
     super();
-    this.state = { loading: true, tracks: [] };
+    this.state = { loading: true, tracks: [], favorites: [] };
     this.renderCardMusic = this.renderCardMusic.bind(this);
+    this.renderLoading = this.renderLoading.bind(this);
+    this.saveIds = this.saveIds.bind(this);
   }
 
   componentDidMount() {
@@ -17,21 +19,39 @@ export class Album extends Component {
       .then((obj) => this.setState({ loading: false, tracks: obj }));
   }
 
+  saveIds(idToBeSaved) {
+    const { favorites } = this.state;
+    if (!favorites.some((id) => id === idToBeSaved)) {
+      return this.setState({ favorites: [...favorites, idToBeSaved] });
+    }
+    return this.setState({ favorites: favorites.filter((id) => id !== idToBeSaved) });
+  }
+
   renderCardMusic() {
-    const { tracks } = this.state;
+    const { tracks, favorites } = this.state;
     return (
       <div data-testid="page-album">
         <h3 data-testid="album-name">{tracks[0].collectionName}</h3>
         <h4 data-testid="artist-name">{tracks[0].artistName}</h4>
         <div>
           { tracks.map((music) => (
-            music.kind === 'song' && <MusicCard
-              key={ music.trackId }
-              track={ music }
-            />))}
+            music.kind === 'song'
+              && <MusicCard
+                saveIds={ this.saveIds }
+                check={ favorites.some((id) => parseInt(id, 10) === music.trackId) }
+                key={ music.trackId }
+                renderLoading={ this.renderLoading }
+                track={ music }
+              />))}
         </div>
       </div>
     );
+  }
+
+  renderLoading() {
+    const { loading } = this.state;
+    if (loading === true) return this.setState({ loading: false });
+    return this.setState({ loading: true });
   }
 
   render() {
