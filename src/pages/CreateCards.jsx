@@ -24,7 +24,7 @@ export class CreateCards extends Component {
 }
 
 CreateCards.propTypes = {
-  album: PropTypes.objectOf({
+  album: PropTypes.shape({
     collectionId: PropTypes.number,
     artistName: PropTypes.string,
     collectionName: PropTypes.string,

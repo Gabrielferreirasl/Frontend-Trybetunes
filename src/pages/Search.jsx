@@ -62,7 +62,8 @@ export class Search extends Component {
       info.length >= 1 ? (
         <div>
           <p>{string}</p>
-          { info.map((Album) => <CreateCards key={ Album.id } album={ Album } />) }
+          { info.map((Album) => (
+            <CreateCards key={ Album.collectionId } album={ Album } />)) }
         </div>)
         : <p>Nenhum álbum foi encontrado</p>
     );

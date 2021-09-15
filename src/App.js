@@ -25,10 +25,10 @@ class App extends React.Component {
         />
         <Route
           path="/album/:id"
-          render={ () => (
+          render={ (props) => (
             <main>
               <Header />
-              <Album />
+              <Album { ...props } />
             </main>
           ) }
         />
