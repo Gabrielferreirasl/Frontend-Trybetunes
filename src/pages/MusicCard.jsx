@@ -10,14 +10,17 @@ export class MusicCard extends Component {
 
   handleFavorites(event) {
     const { name } = event.target;
-    const { renderLoading } = this.props;
-    if (event.checked) {
-      removeSong(name);
+    const { changeLoadingFromAlbum } = this.props;
+    changeLoadingFromAlbum(true);
+    if (event.target.checked) {
+      removeSong(name)
+        .then(() => {
+          changeLoadingFromAlbum(false);
+        });
     }
-    if (!event.checked) {
-      renderLoading();
+    if (event.target.checked === false) {
       addSong(name).then(() => {
-        renderLoading();
+        changeLoadingFromAlbum(false);
       });
     }
     const { saveIds } = this.props;

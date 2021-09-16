@@ -9,7 +9,7 @@ export class Album extends Component {
     super();
     this.state = { loading: true, tracks: [], favorites: [] };
     this.renderCardMusic = this.renderCardMusic.bind(this);
-    this.renderLoading = this.renderLoading.bind(this);
+    this.changeLoadingFromAlbum = this.changeLoadingFromAlbum.bind(this);
     this.saveIds = this.saveIds.bind(this);
   }
 
@@ -27,6 +27,10 @@ export class Album extends Component {
     return this.setState({ favorites: favorites.filter((id) => id !== idToBeSaved) });
   }
 
+  changeLoadingFromAlbum(conditional) {
+    return this.setState({ loading: conditional });
+  }
+
   renderCardMusic() {
     const { tracks, favorites } = this.state;
     return (
@@ -40,18 +44,12 @@ export class Album extends Component {
                 saveIds={ this.saveIds }
                 check={ favorites.some((id) => parseInt(id, 10) === music.trackId) }
                 key={ music.trackId }
-                renderLoading={ this.renderLoading }
+                changeLoadingFromAlbum={ this.changeLoadingFromAlbum }
                 track={ music }
               />))}
         </div>
       </div>
     );
-  }
-
-  renderLoading() {
-    const { loading } = this.state;
-    if (loading === true) return this.setState({ loading: false });
-    return this.setState({ loading: true });
   }
 
   render() {
