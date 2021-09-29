@@ -29,7 +29,6 @@ export class Album extends Component {
 
   renderCardMusic() {
     const { tracks, favorites } = this.state;
-    console.log(favorites);
     return (
       <div data-testid="page-album">
         <h3 data-testid="album-name">{tracks[0].collectionName}</h3>
