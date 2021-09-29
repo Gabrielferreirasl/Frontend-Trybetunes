@@ -1,30 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 export class MusicCard extends Component {
   constructor() {
     super();
-    this.handleFavorites = this.handleFavorites.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleFavorites(event) {
-    const { name } = event.target;
-    const { changeLoadingFromAlbum } = this.props;
-    changeLoadingFromAlbum(true);
-    if (event.target.checked) {
-      removeSong(name)
-        .then(() => {
-          changeLoadingFromAlbum(false);
-        });
-    }
-    if (event.target.checked === false) {
-      addSong(name).then(() => {
-        changeLoadingFromAlbum(false);
-      });
-    }
-    const { saveIds } = this.props;
-    saveIds(name);
+  handleChange(event) {
+    const { track, onChange } = this.props;
+    onChange(event, track);
   }
 
   renderTracks() {
@@ -35,14 +20,19 @@ export class MusicCard extends Component {
         <audio data-testid="audio-component" src={ track.previewUrl } controls>
           <track kind="captions" />
         </audio>
-        <input
-          checked={ check }
+        <label
+          htmlFor={ track.trackId }
           data-testid={ `checkbox-music-${track.trackId}` }
-          type="checkbox"
-          name={ track.trackId }
-          id="fav"
-          onChange={ this.handleFavorites }
-        />
+        >
+          Favorita
+          <input
+            checked={ check }
+            type="checkbox"
+            value={ track }
+            id={ track.trackId }
+            onChange={ this.handleChange }
+          />
+        </label>
       </div>
     );
   }
