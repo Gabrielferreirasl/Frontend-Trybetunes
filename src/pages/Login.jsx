@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { createUser } from '../services/userAPI';
 import { Loading } from './Loading';
+import musicLogin from '../images/musicLogin.gif';
 
 export class Login extends Component {
   constructor() {
@@ -35,25 +36,42 @@ export class Login extends Component {
   renderLogin() {
     const { btnDisabled } = this.state;
     return (
-      <div data-testid="page-login">
-        <form action="get">
-          <input
-            type="text"
-            name="user"
-            id="usuario-login"
-            data-testid="login-name-input"
-            onChange={ this.minimumCharacters }
-          />
-          <button
-            type="submit"
-            disabled={ btnDisabled }
-            data-testid="login-submit-button"
-            onClick={ this.submitUser }
-          >
-            Entrar
-          </button>
-        </form>
-      </div>
+      <main className="flex justify-center mt-20">
+        <div className="w-full max-w-2xl flex-col">
+          <img src={ musicLogin } alt="musicAnimation" />
+          <form className="bg-slate-700 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div className="mb-4">
+              <label
+                className="block text-white text-sm font-bold mb-2"
+                htmlFor="username"
+              >
+                Login
+              </label>
+              <input
+                type="text"
+                name="user"
+                className="shadow appearance-none border rounded w-full
+                py-2 px-3 text-gray-700 leading-tight focus:outline-none
+                focus:shadow-outline"
+                id="username"
+                placeholder="Username"
+                onChange={ this.minimumCharacters }
+              />
+            </div>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                disabled={ btnDisabled }
+                className="bg-blue-500 hover:bg-blue-700 text-white w-full
+                font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={ this.submitUser }
+              >
+                Entrar
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
     );
   }
 
