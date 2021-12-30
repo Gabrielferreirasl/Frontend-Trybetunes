@@ -1,1 +1,1 @@
-# Application: trybetunes-xi.vercel.app
+# Application: https://trybetunes-xi.vercel.app/
