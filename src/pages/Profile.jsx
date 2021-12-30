@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
-import { Loading } from './Loading';
+import { Loading } from '../components/Loading';
+import userDefault from '../images/userDefault.png';
 
 export class Profile extends Component {
   constructor() {
@@ -21,41 +22,52 @@ export class Profile extends Component {
   renderUserInfo() {
     const { user: { name, description, email, image } } = this.state;
     return (
-      <main>
-        <div>
-          <img
-            data-testid="profile-image"
-            src={ image }
-            alt="user"
-          />
-          <Link
-            to="/profile/edit"
-          >
-            <button
-              type="button"
-            >
-              Editar perfil
-            </button>
-          </Link>
+      <div className="flex justify-center mt-20">
+        <div className="italic font-sans rounded shadow-lg w-1/4">
+          <div className="flex justify-around">
+            <img
+              className="rounded-full h-32 w-32"
+              src={ image === '' ? userDefault : image }
+              alt="user"
+            />
+            <div className="flex items-center">
+              <Link
+                className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold
+                 hover:text-white py-2 px-4 border border-blue-500
+                 hover:border-transparent rounded"
+                to="/profile/edit"
+              >
+                Editar perfil
+              </Link>
+            </div>
+          </div>
+          <div className="p-5 ml-10 space-y-9">
+            <div>
+              <h2 className="font-bold mb-1">Name</h2>
+              <p className="text-gray-700 text-base">{name}</p>
+            </div>
+            <div>
+              <h2 className="font-bold mb-1">E-mail</h2>
+              <p className="text-gray-700 text-base">{email === '' ? '""' : email}</p>
+            </div>
+            <div>
+              <h2 className="font-bold mb-1">Description</h2>
+              <p className="text-sm break-all flex-wrap text-gray-700 text-base">
+                {description === '' ? '""' : description}
+              </p>
+            </div>
+          </div>
         </div>
-        <div>
-          <h3>Nome</h3>
-          <p>{name}</p>
-          <h3>E-mail</h3>
-          <p>{email}</p>
-          <h3>Descrição</h3>
-          <p>{description}</p>
-        </div>
-      </main>
+      </div>
     );
   }
 
   render() {
     const { loading } = this.state;
     return (
-      <div data-testid="page-profile">
+      <main>
         {loading ? <Loading /> : this.renderUserInfo()}
-      </div>
+      </main>
     );
   }
 }

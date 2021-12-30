@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { createUser } from '../services/userAPI';
-import { Loading } from './Loading';
+import { Loading } from '../components/Loading';
 import musicLogin from '../images/musicLogin.gif';
 
 export class Login extends Component {
@@ -38,8 +38,8 @@ export class Login extends Component {
     return (
       <main className="flex justify-center mt-20">
         <div className="w-full max-w-2xl flex-col">
-          <img src={ musicLogin } alt="musicAnimation" />
-          <form className="bg-slate-700 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <img className="rounded-t" src={ musicLogin } alt="musicAnimation" />
+          <form className="bg-slate-700 shadow-md px-8 pt-6 pb-8 mb-4 rounded-b">
             <div className="mb-4">
               <label
                 className="block text-white text-sm font-bold mb-2"
