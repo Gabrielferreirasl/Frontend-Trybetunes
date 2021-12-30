@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
-import { Loading } from './Loading';
-import { MusicCard } from './MusicCard';
+import { Loading } from '../components/Loading';
+import { MusicCard } from '../components/MusicCard';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 
 export class Album extends Component {
@@ -30,9 +30,11 @@ export class Album extends Component {
   renderCardMusic() {
     const { tracks, favorites } = this.state;
     return (
-      <div data-testid="page-album">
-        <h3 data-testid="album-name">{tracks[0].collectionName}</h3>
-        <h4 data-testid="artist-name">{tracks[0].artistName}</h4>
+      <div className="p-4 ml-64 mr-64">
+        <div className="ml-20 font-bold italic font-sans space-y-3 mt-10 mb-10">
+          <h3>{tracks[0].collectionName}</h3>
+          <h4>{tracks[0].artistName}</h4>
+        </div>
         <div>
           { tracks.slice(1).map((music) => (
             <MusicCard
